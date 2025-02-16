@@ -1,0 +1,92 @@
+version: '1'
+
+services:
+  app:
+    build: 
+      context: .
+      dockerfile: server/Dockerfile
+    ports:
+      - "8080:8080"
+    environment:
+      MYSQL_HOST: db
+      MYSQL_USER: filestore
+      MYSQL_PASSWORD: filestore_password
+      MYSQL_DATABASE: filestore
+      STORAGE_SERVERS: http://storage1:8081,http://storage2:8081,http://storage3:8081,http://storage4:8081,http://storage5:8081,http://storage6:8081,http://storage7:8081
+    depends_on:
+      - db
+
+  db:
+    image: mysql:8.0
+    environment:
+      MYSQL_DATABASE: filestore
+    volumes:
+      - mysql_data:/var/lib/mysql
+    ports:
+      - "3307:3306"
+
+  storage1:
+    build: 
+      context: .
+      dockerfile: storage/Dockerfile
+    environment:
+      - PORT=8081
+    ports:
+      - "8081:8081"
+
+  storage2:
+    build: 
+      context: .
+      dockerfile: storage/Dockerfile
+    environment:
+      - PORT=8081
+    ports:
+      - "8082:8082"
+
+  storage3:
+    build: 
+      context: .
+      dockerfile: storage/Dockerfile
+    environment:
+      - PORT=8081
+    ports:
+      - "8083:8083"
+
+  storage4:
+    build: 
+      context: .
+      dockerfile: storage/Dockerfile
+    environment:
+      - PORT=8081
+    ports:
+      - "8084:8084"
+
+  storage5:
+    build: 
+      context: .
+      dockerfile: storage/Dockerfile
+    environment:
+      - PORT=8081
+    ports:
+      - "8085:8085"
+
+  storage6:
+    build: 
+      context: .
+      dockerfile: storage/Dockerfile
+    environment:
+      - PORT=8081
+    ports:
+      - "8086:8086"
+
+  storage7:
+    build: 
+      context: .
+      dockerfile: storage/Dockerfile
+    environment:
+      - PORT=8081
+    ports:
+      - "8087:8087"
+
+volumes:
+  mysql_data:
