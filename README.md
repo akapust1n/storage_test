@@ -9,7 +9,7 @@ docker compose up --build -d
 
 ```bash
 go build -o server ./server
-go test -v ./server```
+go test -v ./server
 ```
 
 ## Добавление нового storage сервера
@@ -19,7 +19,7 @@ go test -v ./server```
 docker build -t storage-image -f storage/Dockerfile .
 ```
 
-2. Запустить новый storage сервер:
+2. Запустить новый storage сервер(пример):
 ```bash
 docker run -d -p 8088:8088 -e PORT=8088 storage-image
 ```
